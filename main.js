@@ -57,17 +57,18 @@ cards.forEach(function(item, index) {
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
 let zmienna = 0;
+
 function changeBackground() {
   prevIndex = 0;
   console.log(this);
   // this.style.backgroundImage = 'url:(til)';
   zmienna++;
-  console.log(zmienna);
+
   if (zmienna == 2) {
     zmienna = 0;
-   const movesSpan = document.getElementById('moves')
-   movesSpan.innerText++
-   //console.log(parseInt(movesSpan.innerText))
+    const movesSpan = document.getElementById("moves");
+    movesSpan.innerText++;
+    //console.log(parseInt(movesSpan.innerText))
   }
 
   console.log(this.getAttribute("data-index"));
@@ -78,28 +79,3 @@ function changeBackground() {
 cards.forEach(function(item) {
   item.addEventListener("click", changeBackground);
 });
-console.log(this);
-// this.style.backgroundImage = 'url:(til)';
-zmienna++;
-console.log(zmienna);
-if (zmienna == 2) {
-  zmienna = 0;
-  // console.log("mamy parę");
-  prevIndex = 0;
-  this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
-    "data-index"
-  )}.png')`;
-}
-cards.forEach(function(item) {
-  item.addEventListener("click", changeBackground);
-});
-
-zmienna++;
-console.log(zmienna);
-if (zmienna == 2) {
-  zmienna = 0;
-  const movesSpan = document.getElementById("moves");
-  movesSpan.innerText++;
-}
-
-//5.
