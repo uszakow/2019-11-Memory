@@ -60,7 +60,7 @@ let zmienna = 0;
 
 function changeBackground() {
   prevIndex = 0;
-  console.log(this);
+  // console.log(this);
   // this.style.backgroundImage = 'url:(til)';
   zmienna++;
 
@@ -68,14 +68,41 @@ function changeBackground() {
     zmienna = 0;
     const movesSpan = document.getElementById("moves");
     movesSpan.innerText++;
-    //console.log(parseInt(movesSpan.innerText))
+    //console.log(parseInt(movesSpan.innerText))    
+
+
   }
 
-  console.log(this.getAttribute("data-index"));
+  // console.log(this.getAttribute("data-index"));
   this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
     "data-index"
   )}.png')`;
 }
-cards.forEach(function(item) {
+cards.forEach(function (item) {
   item.addEventListener("click", changeBackground);
 });
+
+
+//5. Porównujemy dwie karty
+
+
+//6. Obraca karty po 3 sec
+let cardFirst = null;
+let cardSecond = null;
+cards.forEach(function (item) {
+  item.addEventListener("click", backStartView);
+}, 3000);
+
+function backStartView() {
+  if (cardFirst === null) {
+    cardFirst = this;
+  }
+  else {
+    cardSecond = this;
+  }
+  console.log(cardFirst)
+  console.log(cardSecond)
+  if (cardFirst !== null && cardSecond !== null) {
+    
+  }
+}
