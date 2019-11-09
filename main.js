@@ -49,7 +49,8 @@ console.log(zmienna);
 if (zmienna == 2) {
     zmienna = 0;
     const movesSpan = document.getElementById('moves')
-    movesSpan.innerText++
+    +movesSpan.innerText++;
 }
 
-//5.
+//5. Porównanie dwóch obrazków
+
