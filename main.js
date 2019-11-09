@@ -1,7 +1,11 @@
 const trialArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const licze = () => {
-  console.log("działam");
+  let index = 0;
+  setInterval(function() {
+    console.log(index);
+    index++;
+  }, 1000);
 };
 
 const getButton = document.getElementById("reset");
