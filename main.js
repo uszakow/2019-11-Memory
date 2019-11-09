@@ -94,12 +94,5 @@ cards.forEach(function(item) {
   item.addEventListener("click", changeBackground);
 });
 
-zmienna++;
-console.log(zmienna);
-if (zmienna == 2) {
-  zmienna = 0;
-  const movesSpan = document.getElementById("moves");
-  movesSpan.innerText++;
-}
 
 //5.
