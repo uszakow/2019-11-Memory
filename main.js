@@ -57,15 +57,56 @@ cards.forEach(function (item, index) {
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
 let zmienna = 0;
+//Zmienne dla czasowego przechowywania dwóch kart
+let cardFirst = null;
+let cardSecond = null;
+
+// function cleanCards(cardFirst, cardSecond) {
+//   cardFirst.style.backgroundImage = '';
+//   cardSecond.style.backgroundImage = '';
+//   cardFirst = null;
+//   cardSecond = null;
+//   console.log('Clean');
+
+// }
 
 function changeBackground() {
+  // if (cardSecond !== null) {
+  //   cleanCards(cardFirst, cardSecond);
+  // }
   prevIndex = 0;
-  // console.log(this);
-  // this.style.backgroundImage = 'url:(til)';
   zmienna++;
+
+  //Zapisujeny pierwszą kartę. Jeżeli już jest, to drugą.
+  if (cardFirst === null) {
+    cardFirst = this;
+    console.log(cardFirst)
+  }
+  else {
+    cardSecond = this;
+    console.log(cardSecond)
+    // setTimeout(() => {
+    // cardFirst.style.backgroundImage = '';
+    // cardSecond.style.backgroundImage = '';
+    // cardFirst = null;
+    // cardSecond = null;
+    // cleanCards(cardFirst, cardSecond);
+    // }, 2000);
+
+    cardFirst.style.backgroundImage = '';
+    cardSecond.style.backgroundImage = '';
+    cardFirst = null;
+    cardSecond = null;
+  }
+
+  // if (cardFirst !== null && cardSecond !== null) {
+  //   cleanCards(cardFirst, cardSecond);
+  // }
 
   if (zmienna == 2) {
     zmienna = 0;
+
+
     const movesSpan = document.getElementById("moves");
     movesSpan.innerText++;
     //console.log(parseInt(movesSpan.innerText))    
@@ -77,6 +118,8 @@ function changeBackground() {
   this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
     "data-index"
   )}.png')`;
+
+
 }
 cards.forEach(function (item) {
   item.addEventListener("click", changeBackground);
@@ -86,23 +129,5 @@ cards.forEach(function (item) {
 //5. Porównujemy dwie karty
 
 
-//6. Obraca karty po 3 sec
-let cardFirst = null;
-let cardSecond = null;
-cards.forEach(function (item) {
-  item.addEventListener("click", backStartView);
-}, 3000);
+//6. 
 
-function backStartView() {
-  if (cardFirst === null) {
-    cardFirst = this;
-  }
-  else {
-    cardSecond = this;
-  }
-  console.log(cardFirst)
-  console.log(cardSecond)
-  if (cardFirst !== null && cardSecond !== null) {
-    
-  }
-}
