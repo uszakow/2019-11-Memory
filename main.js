@@ -37,21 +37,19 @@ cards.forEach(function (item, index) {
 
 let zmienna = 0;
 function changeBackground() {
-    console.log(this);
-    console.log(this.getAttribute('data-index'));
+    prevIndex = 0;
     this.style.backgroundImage = (`url('tile-images/tile_${this.getAttribute('data-index')}.png')`);
 }
 cards.forEach(function (item) {
     item.addEventListener('click', changeBackground);
 })
-console.log(this);
-// this.style.backgroundImage = 'url:(til)';
+
 zmienna++;
 console.log(zmienna);
 if (zmienna == 2) {
     zmienna = 0;
-    // console.log("mamy parę");
+    const movesSpan = document.getElementById('moves')
+    movesSpan.innerText++
 }
-// }
 
 //5.
