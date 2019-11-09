@@ -22,9 +22,7 @@ const indexOfCard = [
   9
 ];
 
-//2. Randomizujemy tablicę.
-const trialArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+//stoper
 const licze = () => {
   let index = 0;
   setInterval(function() {
@@ -33,6 +31,9 @@ const licze = () => {
   }, 1000);
   console.log("działam");
 };
+
+//2. Randomizujemy tablicę.
+shuffle(indexOfCard);
 function shuffle(a) {
   var j, x, i;
   for (i = a.length - 1; i > 0; i--) {
@@ -44,12 +45,13 @@ function shuffle(a) {
   return a;
 }
 
+//
 const getButton = document.getElementById("reset");
 getButton.addEventListener("click", function() {
   licze();
 
-  shuffle(trialArray);
-  console.log(trialArray);
+  shuffle(indexOfCard);
+  console.log(indexOfCard);
 });
 
 //3. Pobieramy karty. Nadajemy zrandomizowane indeksy kartom.
@@ -57,3 +59,5 @@ const cards = document.querySelectorAll(".card");
 cards.forEach(function(item, index) {
   item.setAttribute("data-index", indexOfCard[index]);
 });
+
+console.log(indexOfCard);
