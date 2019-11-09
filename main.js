@@ -4,3 +4,7 @@ const cards = document.querySelectorAll('.card');
 cards.forEach(function (item, index) {
     item.setAttribute('data-index', indexOfCard[index]);
 });
+const getButton = document.getElementById("reset");
+getButton.addEventListener("click", function() {
+  console.log("działam");
+});
