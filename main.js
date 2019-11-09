@@ -34,4 +34,7 @@ cards.forEach(function (item, index) {
     item.setAttribute('data-index', indexOfCard[index]);
 });
 
+//4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
+
+//5. 
