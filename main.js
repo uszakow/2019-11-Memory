@@ -61,6 +61,7 @@ cards.forEach(function(item, index) {
 
 let zmienna = 0;
 function changeBackground() {
+  prevIndex = 0;
   console.log(this);
   // this.style.backgroundImage = 'url:(til)';
   zmienna++;
