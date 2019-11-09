@@ -55,6 +55,6 @@ cards.forEach(function (item) {
    movesSpan.innerText++
    //console.log(parseInt(movesSpan.innerText))
   }
-}
+
 
 //5.
