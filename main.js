@@ -1,4 +1,5 @@
 //1. Robimy tablicę z indeksami dla kart.
+
 const indexOfCard = [
   0,
   0,
@@ -22,11 +23,13 @@ const indexOfCard = [
   9
 ];
 
+const timerSpan = document.getElementById("timer");
+
 //stoper
+
 const licze = () => {
-  let index = 0;
-  const timerSpan = document.getElementById("timer");
-  setInterval(() => timerSpan.innerText++, 1000);
+// const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  //clearInterval(timerInterval)
 };
 
 //2. Randomizujemy tablicę.
@@ -41,16 +44,27 @@ function shuffle(a) {
   }
   return a;
 }
+const movesSpan = document.getElementById("moves");
 
 //
+let timerRunning = false
+
+
+
 const getButton = document.getElementById("reset");
-getButton.addEventListener("click", function () {
+getButton.addEventListener("click", function() {
   licze();
+  movesSpan.innerText = 0 
+  timerSpan.innerText = 0
+  if (!timerRunning) {
+  const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  timerRunning = true  //clearInterval(timerInterval)
+  }
 });
 
 //3. Pobieramy karty. Nadajemy zrandomizowane indeksy kartom.
 const cards = document.querySelectorAll(".card");
-cards.forEach(function (item, index) {
+cards.forEach(function(item, index) {
   item.setAttribute("data-index", indexOfCard[index]);
 });
 
@@ -70,48 +84,31 @@ let cardSecond = null;
 
 // }
 
+let currIndex = 0;
+let prevIndex = 0;
 function changeBackground() {
-  // if (cardSecond !== null) {
-  //   cleanCards(cardFirst, cardSecond);
-  // }
-  prevIndex = 0;
   zmienna++;
+  // console.log(zmienna);
 
-  //Zapisujeny pierwszą kartę. Jeżeli już jest, to drugą.
-  if (cardFirst === null) {
-    cardFirst = this;
-    console.log(cardFirst)
-  }
-  else {
-    cardSecond = this;
-    console.log(cardSecond)
-    // setTimeout(() => {
-    // cardFirst.style.backgroundImage = '';
-    // cardSecond.style.backgroundImage = '';
-    // cardFirst = null;
-    // cardSecond = null;
-    // cleanCards(cardFirst, cardSecond);
-    // }, 2000);
-
-    cardFirst.style.backgroundImage = '';
-    cardSecond.style.backgroundImage = '';
-    cardFirst = null;
-    cardSecond = null;
-  }
-
-  // if (cardFirst !== null && cardSecond !== null) {
-  //   cleanCards(cardFirst, cardSecond);
-  // }
-
-  if (zmienna == 2) {
+  // console.log(this);
+  // this.style.backgroundImage = 'url:(til)';
+  if (zmienna === 1) {
+    prevIndex = this.dataset.index;
+    // console.log(this.dataset.index);
+    // console.log(currIndex);
+  } else if (zmienna == 2) {
+    currIndex = this.dataset.index;
     zmienna = 0;
-
-
-    const movesSpan = document.getElementById("moves");
+   
     movesSpan.innerText++;
-    //console.log(parseInt(movesSpan.innerText))    
+    //console.log(parseInt(movesSpan.innerText))
 
+    //Zachowanie przy znalezieniu pary
+    if (prevIndex === currIndex) {
+      console.log("para!");
+    }
 
+    //zachowanie jeżeli nie trafilismy
   }
 
   // console.log(this.getAttribute("data-index"));
@@ -121,13 +118,28 @@ function changeBackground() {
 
 
 }
-cards.forEach(function (item) {
+
+cards.forEach(function(item) {
   item.addEventListener("click", changeBackground);
 });
 
-
 //5. Porównujemy dwie karty
 
+//6. Obraca karty po 3 sec
+let cardFirst = null;
+let cardSecond = null;
+cards.forEach(function(item) {
+  item.addEventListener("click", backStartView);
+}, 3000);
 
-//6. 
-
+function backStartView() {
+  if (cardFirst === null) {
+    cardFirst = this;
+  } else {
+    cardSecond = this;
+  }
+  // console.log(cardFirst);
+  // console.log(cardSecond);
+  if (cardFirst !== null && cardSecond !== null) {
+  }
+}
