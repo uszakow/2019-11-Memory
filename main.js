@@ -44,14 +44,14 @@ function changeBackground() {
 cards.forEach(function (item) {
     item.addEventListener('click', changeBackground);
 })
-  console.log(this);
-  // this.style.backgroundImage = 'url:(til)';
-  zmienna++;
-  console.log(zmienna);
-  if (zmienna == 2) {
+console.log(this);
+// this.style.backgroundImage = 'url:(til)';
+zmienna++;
+console.log(zmienna);
+if (zmienna == 2) {
     zmienna = 0;
     // console.log("mamy parę");
-  }
 }
+// }
 
 //5.
