@@ -37,7 +37,9 @@ button {
     padding: .5rem;
     background-image: url('tile-images/question-mark.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    /* background-size: cover; */
+    background-position: center;
+    background-size: 80%;
     width: 110px;
     height: 110px;
     border-radius: 7px;
