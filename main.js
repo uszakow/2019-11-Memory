@@ -1,4 +1,5 @@
 //1. Robimy tablicę z indeksami dla kart.
+
 const indexOfCard = [
   0,
   0,
@@ -22,11 +23,13 @@ const indexOfCard = [
   9
 ];
 
+const timerSpan = document.getElementById("timer");
+
 //stoper
+
 const licze = () => {
-  let index = 0;
-  const timerSpan = document.getElementById("timer");
-  setInterval(() => timerSpan.innerText++, 1000);
+// const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  //clearInterval(timerInterval)
 };
 
 //2. Randomizujemy tablicę.
@@ -41,11 +44,22 @@ function shuffle(a) {
   }
   return a;
 }
+const movesSpan = document.getElementById("moves");
 
 //
+let timerRunning = false
+
+
+
 const getButton = document.getElementById("reset");
 getButton.addEventListener("click", function() {
   licze();
+  movesSpan.innerText = 0 
+  timerSpan.innerText = 0
+  if (!timerRunning) {
+  const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  timerRunning = true  //clearInterval(timerInterval)
+  }
 });
 
 //3. Pobieramy karty. Nadajemy zrandomizowane indeksy kartom.
@@ -66,7 +80,7 @@ function changeBackground() {
 
   if (zmienna == 2) {
     zmienna = 0;
-    const movesSpan = document.getElementById("moves");
+   
     movesSpan.innerText++;
     //console.log(parseInt(movesSpan.innerText))
   }
