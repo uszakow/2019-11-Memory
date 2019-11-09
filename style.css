@@ -40,6 +40,15 @@ button {
     background-size: cover;
     width: 110px;
     height: 110px;
+    border-radius: 7px;
+
+}
+
+.card:hover {
+    cursor: pointer;
+    background-color: #b9d4f1;
+    transition: all 2.2s ease-out;
+
 }
 
 .summary {
