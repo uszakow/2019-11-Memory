@@ -126,20 +126,3 @@ cards.forEach(function(item) {
 //5. Porównujemy dwie karty
 
 //6. Obraca karty po 3 sec
-let cardFirst = null;
-let cardSecond = null;
-cards.forEach(function(item) {
-  item.addEventListener("click", backStartView);
-}, 3000);
-
-function backStartView() {
-  if (cardFirst === null) {
-    cardFirst = this;
-  } else {
-    cardSecond = this;
-  }
-  // console.log(cardFirst);
-  // console.log(cardSecond);
-  if (cardFirst !== null && cardSecond !== null) {
-  }
-}
