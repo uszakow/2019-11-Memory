@@ -28,7 +28,7 @@ const timerSpan = document.getElementById("timer");
 //stoper
 
 const licze = () => {
-// const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  // const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
   //clearInterval(timerInterval)
 };
 
@@ -47,18 +47,16 @@ function shuffle(a) {
 const movesSpan = document.getElementById("moves");
 
 //
-let timerRunning = false
-
-
+let timerRunning = false;
 
 const getButton = document.getElementById("reset");
 getButton.addEventListener("click", function() {
   licze();
-  movesSpan.innerText = 0 
-  timerSpan.innerText = 0
+  movesSpan.innerText = 0;
+  timerSpan.innerText = 0;
   if (!timerRunning) {
-  const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
-  timerRunning = true  //clearInterval(timerInterval)
+    const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+    timerRunning = true; //clearInterval(timerInterval)
   }
 });
 
@@ -71,38 +69,58 @@ cards.forEach(function(item, index) {
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
 let zmienna = 0;
-
 let currIndex = 0;
 let prevIndex = 0;
+let visibleCards = 0;
+
 function changeBackground() {
-  zmienna++;
-  // console.log(zmienna);
-
-  // console.log(this);
-  // this.style.backgroundImage = 'url:(til)';
-  if (zmienna === 1) {
-    prevIndex = this.dataset.index;
-    // console.log(this.dataset.index);
-    // console.log(currIndex);
-  } else if (zmienna == 2) {
-    currIndex = this.dataset.index;
-    zmienna = 0;
-   
-    movesSpan.innerText++;
-    //console.log(parseInt(movesSpan.innerText))
-
-    //Zachowanie przy znalezieniu pary
-    if (prevIndex === currIndex) {
-      console.log("para!");
+  if (visibleCards < 2) {
+    zmienna++;
+    if (!this.classList.contains("removed") && visibleCards < 2) {
+      this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
+        "data-index"
+      )}.png')`;
+      // console.log(zmienna);
     }
 
-    //zachowanie jeżeli nie trafilismy
+    this.classList.toggle("picked");
+
+    // console.log(zmienna);
+
+    // console.log(this);
+    // this.style.backgroundImage = 'url:(til)';
+    if (zmienna === 1) {
+      prevIndex = this.dataset.index;
+      // console.log(this.dataset.index);
+      // console.log(currIndex);
+    } else if (zmienna === 2) {
+      console.log(zmienna);
+
+      currIndex = this.dataset.index;
+      zmienna = 0;
+
+      movesSpan.innerText++;
+      //console.log(parseInt(movesSpan.innerText))
+
+      //Zachowanie przy znalezieniu pary
+      if (prevIndex === currIndex) {
+        // console.log("para!");
+        cards.forEach(e => {
+          if (e.dataset.index === currIndex) {
+            e.style.backgroundImage = "none";
+            e.classList.add("removed");
+            // console.log(e.style.backgroundImage);
+          }
+        });
+      }
+
+      //zachowanie jeżeli nie trafilismy
+    }
   }
 
   // console.log(this.getAttribute("data-index"));
-  this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
-    "data-index"
-  )}.png')`;
+  visibleCards++;
+  console.log(visibleCards);
 }
 
 cards.forEach(function(item) {
@@ -129,3 +147,49 @@ function backStartView() {
   if (cardFirst !== null && cardSecond !== null) {
   }
 }
+
+// zmienna++;
+// if (!this.classList.contains("removed") && visibleCards < 2) {
+//   this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
+//     "data-index"
+//   )}.png')`;
+//   // console.log(zmienna);
+// }
+
+// this.classList.toggle("picked");
+
+// // console.log(zmienna);
+
+// // console.log(this);
+// // this.style.backgroundImage = 'url:(til)';
+// if (zmienna === 1) {
+//   prevIndex = this.dataset.index;
+//   // console.log(this.dataset.index);
+//   // console.log(currIndex);
+// } else if (zmienna === 2) {
+//   console.log(zmienna);
+
+//   currIndex = this.dataset.index;
+//   zmienna = 0;
+
+//   movesSpan.innerText++;
+//   //console.log(parseInt(movesSpan.innerText))
+
+//   //Zachowanie przy znalezieniu pary
+//   if (prevIndex === currIndex) {
+//     // console.log("para!");
+//     cards.forEach(e => {
+//       if (e.dataset.index === currIndex) {
+//         e.style.backgroundImage = "none";
+//         e.classList.add("removed");
+//         // console.log(e.style.backgroundImage);
+//       }
+//     });
+//   }
+
+//   //zachowanie jeżeli nie trafilismy
+// }
+
+// // console.log(this.getAttribute("data-index"));
+// visibleCards++;
+// console.log(visibleCards);
