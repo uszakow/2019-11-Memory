@@ -59,23 +59,36 @@ cards.forEach(function(item, index) {
 let zmienna = 0;
 
 function changeBackground() {
-  prevIndex = 0;
-  console.log(this);
-  // this.style.backgroundImage = 'url:(til)';
   zmienna++;
+  // console.log(zmienna);
+  let prevIndex = 0;
+  let currIndex = 0;
 
-  if (zmienna == 2) {
+  // console.log(this);
+  // this.style.backgroundImage = 'url:(til)';
+  if (zmienna === 1) {
+    prevIndex = this.dataset.index;
+    console.log(prevIndex);
+  } else if (zmienna == 2) {
+    currIndex = this.dataset.index;
+    console.log(currIndex);
+
     zmienna = 0;
     const movesSpan = document.getElementById("moves");
     movesSpan.innerText++;
     //console.log(parseInt(movesSpan.innerText))
+
+    //Zachowanie przy znalezieniu pary
+
+    //zachowanie jeżeli nie trafilismy
   }
 
-  console.log(this.getAttribute("data-index"));
+  // console.log(this.getAttribute("data-index"));
   this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
     "data-index"
   )}.png')`;
 }
+
 cards.forEach(function(item) {
   item.addEventListener("click", changeBackground);
 });
