@@ -28,7 +28,7 @@ const timerSpan = document.getElementById("timer");
 //stoper
 
 const licze = () => {
-// const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+  // const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
   //clearInterval(timerInterval)
 };
 
@@ -52,46 +52,41 @@ let timerRunning = false
 
 
 const getButton = document.getElementById("reset");
-getButton.addEventListener("click", function() {
+getButton.addEventListener("click", function () {
   licze();
-  movesSpan.innerText = 0 
+  movesSpan.innerText = 0
   timerSpan.innerText = 0
   if (!timerRunning) {
-  const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
-  timerRunning = true  //clearInterval(timerInterval)
+    const timerInterval = setInterval(() => timerSpan.innerText++, 1000);
+    timerRunning = true  //clearInterval(timerInterval)
   }
 });
 
 //3. Pobieramy karty. Nadajemy zrandomizowane indeksy kartom.
 const cards = document.querySelectorAll(".card");
-cards.forEach(function(item, index) {
+cards.forEach(function (item, index) {
   item.setAttribute("data-index", indexOfCard[index]);
 });
 
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
 let zmienna = 0;
+
+let currIndex = 0;
+let prevIndex = 0;
+
 //Zmienne dla czasowego przechowywania dwóch kart
 let cardFirst = null;
 let cardSecond = null;
 
-// function cleanCards(cardFirst, cardSecond) {
-//   cardFirst.style.backgroundImage = '';
-//   cardSecond.style.backgroundImage = '';
-//   cardFirst = null;
-//   cardSecond = null;
-//   console.log('Clean');
-
-// }
-
-let currIndex = 0;
-let prevIndex = 0;
 function changeBackground() {
+
+
+
   zmienna++;
   // console.log(zmienna);
 
   // console.log(this);
-  // this.style.backgroundImage = 'url:(til)';
   if (zmienna === 1) {
     prevIndex = this.dataset.index;
     // console.log(this.dataset.index);
@@ -99,7 +94,7 @@ function changeBackground() {
   } else if (zmienna == 2) {
     currIndex = this.dataset.index;
     zmienna = 0;
-   
+
     movesSpan.innerText++;
     //console.log(parseInt(movesSpan.innerText))
 
@@ -117,12 +112,65 @@ function changeBackground() {
   )}.png')`;
 
 
+
 }
 
-cards.forEach(function(item) {
+cards.forEach(function (item) {
   item.addEventListener("click", changeBackground);
 });
 
 //5. Porównujemy dwie karty
 
 //6. Obraca karty po 3 sec
+cards.forEach(function (item) {
+  item.addEventListener("click", changeViewAsStart);
+});
+
+
+function changeViewAsStart() {
+  if (cardFirst !== null && cardSecond !== null) {
+    if (cardFirst.style.backgroundImage) {
+      cardFirst.style.backgroundImage = '';
+    }
+    if (cardSecond.style.backgroundImage) {
+      cardSecond.style.backgroundImage = '';
+    }
+    cardFirst = null;
+    cardSecond = null;
+    console.log(cardFirst)
+    console.log(cardSecond)
+    // console.log(cardFirst)
+    // console.log(cardSecond)
+    // cleanCards(cardFirst, cardSecond);
+  }
+
+  if (cardFirst === null) {
+    console.log('first 0')
+    cardFirst = this;
+  }
+  else if (cardFirst !== null && cardSecond === null) {
+    console.log('second 0')
+    cardSecond = this;
+    // cleanCards(cardFirst, cardSecond);
+    // setTimeout(cleanCards, 2000, cardFirst, cardSecond);
+    setTimeout(() => {
+      cardFirst.style.backgroundImage = '';
+      cardSecond.style.backgroundImage = '';
+      cardFirst = null;
+      cardSecond = null;
+    }, 2000);
+  }
+
+}
+
+// function cleanCards(first, second) {
+//   console.log(cardFirst);
+//   console.log(cardSecond);
+//   first.style.backgroundImage = '';
+//   second.style.backgroundImage = '';
+//   cardFirst = null;
+//   cardSecond = null;
+//   console.log('Clean');
+//   console.log(cardFirst)
+//   console.log(cardSecond)
+// }
