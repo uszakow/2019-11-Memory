@@ -6,9 +6,9 @@ const trialArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 //stoper
 const licze = () => {
-  let index = 0;
-  const timerSpan = document.getElementById("timer");
-  setInterval(() => timerSpan.innerText++, 1000);
+    let index = 0;
+    const timerSpan = document.getElementById("timer");
+    setInterval(() => timerSpan.innerText++, 1000);
 };
 
 //2. Randomizujemy tablicę.
@@ -26,8 +26,8 @@ function shuffle(a) {
 
 //
 const getButton = document.getElementById("reset");
-getButton.addEventListener("click", function() {
-  licze();
+getButton.addEventListener("click", function () {
+    licze();
 });
 
 //3. Pobieramy karty. Nadajemy zrandomizowane indeksy kartom.
@@ -39,12 +39,9 @@ cards.forEach(function (item, index) {
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 function changeBackground() {
     console.log(this);
-    // this.style.backgroundImage = 'url:(til)';
+    console.log(this.getAttribute('data-index'));
+    this.style.backgroundImage = (`url('tile-images/tile_${this.getAttribute('data-index')}.png')`);
 }
-
-// cards.addEventListener('click', changeBackground);
-// console.log(cards);
-// document.querySelector('.card').addEventListener('click', changeBackground);
 cards.forEach(function (item) {
     item.addEventListener('click', changeBackground);
 })
