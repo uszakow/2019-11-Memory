@@ -1,9 +1,6 @@
 //1. Robimy tablicę z indeksami dla kart.
 const indexOfCard = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
 
-//2. Randomizujemy tablicę.
-const trialArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 //stoper
 const licze = () => {
     let index = 0;
@@ -37,6 +34,8 @@ cards.forEach(function (item, index) {
 });
 
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
+
+let zmienna = 0;
 function changeBackground() {
     console.log(this);
     console.log(this.getAttribute('data-index'));
@@ -45,5 +44,14 @@ function changeBackground() {
 cards.forEach(function (item) {
     item.addEventListener('click', changeBackground);
 })
+  console.log(this);
+  // this.style.backgroundImage = 'url:(til)';
+  zmienna++;
+  console.log(zmienna);
+  if (zmienna == 2) {
+    zmienna = 0;
+    // console.log("mamy parę");
+  }
+}
 
-//5. 
+//5.
