@@ -1,5 +1,26 @@
 //1. Robimy tablicę z indeksami dla kart.
-const indexOfCard = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
+const indexOfCard = [
+  0,
+  0,
+  1,
+  1,
+  2,
+  2,
+  3,
+  3,
+  4,
+  4,
+  5,
+  5,
+  6,
+  6,
+  7,
+  7,
+  8,
+  8,
+  9,
+  9
+];
 
 //stoper
 const licze = () => {
@@ -36,23 +57,25 @@ cards.forEach(function (item, index) {
 //4. Przy nacisku na kartę zmieniamy tło w zależności od znaczenia 'data-index'. Zapisujemy, że to pierwsza otwarta karta
 
 let zmienna = 0;
-let cardFirst,
-  cardSecond;
+
 function changeBackground() {
   prevIndex = 0;
-  this.style.backgroundImage = (`url('tile-images/tile_${this.getAttribute('data-index')}.png')`);
+  console.log(this);
+  // this.style.backgroundImage = 'url:(til)';
+  zmienna++;
+
+  if (zmienna == 2) {
+    zmienna = 0;
+    const movesSpan = document.getElementById("moves");
+    movesSpan.innerText++;
+    //console.log(parseInt(movesSpan.innerText))
+  }
+
+  console.log(this.getAttribute("data-index"));
+  this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute(
+    "data-index"
+  )}.png')`;
 }
-cards.forEach(function (item) {
-  item.addEventListener('click', changeBackground);
-})
-
-zmienna++;
-console.log(zmienna);
-if (zmienna == 2) {
-  zmienna = 0;
-  const movesSpan = document.getElementById('moves')
-    + movesSpan.innerText++;
-}
-
-//5. Porównanie dwóch obrazków
-
+cards.forEach(function(item) {
+  item.addEventListener("click", changeBackground);
+});
