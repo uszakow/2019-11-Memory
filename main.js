@@ -67,7 +67,9 @@ function changeBackground() {
   console.log(zmienna);
   if (zmienna == 2) {
     zmienna = 0;
-    // console.log("mamy parę");
+   const movesSpan = document.getElementById('moves')
+   movesSpan.innerText++
+   //console.log(parseInt(movesSpan.innerText))
   }
 }
 
