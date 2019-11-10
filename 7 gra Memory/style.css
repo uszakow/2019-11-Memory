@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+.wrap{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 2px;
+    width: fit-content;
+}
+
+.card{    
+    width: 100px;
+    height: 100px;
+    background-color: #8fbff5;
+    background-image: url(tile-images/question-mark.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90px 90px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+.card:hover {
+    cursor: pointer;
+    background-color: #b9d4f1;
+    transition: all .2s ease-out;
+}
+
+#reset{
+    background-color: red;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+}

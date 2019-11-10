@@ -128,6 +128,7 @@ cards.forEach(function (item) {
 
 
 function changeViewAsStart() {
+
   if (cardFirst !== null && cardSecond !== null) {
     if (cardFirst.style.backgroundImage) {
       cardFirst.style.backgroundImage = '';
@@ -154,10 +155,12 @@ function changeViewAsStart() {
     // cleanCards(cardFirst, cardSecond);
     // setTimeout(cleanCards, 2000, cardFirst, cardSecond);
     setTimeout(() => {
-      cardFirst.style.backgroundImage = '';
-      cardSecond.style.backgroundImage = '';
-      cardFirst = null;
-      cardSecond = null;
+      if (cardFirst !== null && cardSecond !== null) {
+        cardFirst.style.backgroundImage = '';
+        cardSecond.style.backgroundImage = '';
+        cardFirst = null;
+        cardSecond = null;
+      }
     }, 2000);
   }
 
