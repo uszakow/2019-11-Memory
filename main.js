@@ -6,6 +6,7 @@ const startButton = document.getElementById("start");
 const cards = document.querySelectorAll(".card");
 const grid = document.querySelector("#grid");
 const moves = document.getElementById("moves");
+const startMenu = document.getElementById("start-menu");
 let card1;
 let card2;
 
@@ -60,6 +61,7 @@ const menuButtons = menu.querySelectorAll("button").forEach(e => {
   e.addEventListener("click", function() {
     if (this.id === "start") {
       startTimer();
+      startMenu.classList.add("hidden");
       if (!gameRunning) {
         this.innerText = "Start";
       } else {
@@ -74,11 +76,15 @@ const getButton = document.getElementById("reset");
 getButton.addEventListener("click", function() {
   cards.forEach(card => {
     card.style.backgroundImage = `url('tile-images/question-mark.png')`;
-    card.classList.remove("flipped");
+    card.classList.remove("flipped", "removed");
   });
+  shuffle(cardsArray);
   timerSpan.innerText = 0;
   card1 = card2 = undefined;
   moves.innerText = 0;
+  // gameRunning = !gameRunning;
+  startMenu.innerHTML = "<h3>Welcome</h3><h4>Press start</h4>";
+  // console.log(cardsArray);
 });
 
 //card clicking action
@@ -105,9 +111,9 @@ function changeBackground() {
     //Compare flipped cards
     if (flippedCardsAmount === 1) {
       moves.innerText++;
+      //ACTION WHEN PAIR HAS BEEN FOUND
       if (cardsArray[card1] === cardsArray[card2]) {
-        //ACTION WHEN PAIR HAS BEEN FOUND
-        console.log("pair!");
+        // console.log("pair!");
 
         cards.forEach(e => {
           if (e.classList.contains("flipped")) {
@@ -118,13 +124,16 @@ function changeBackground() {
         });
         solvedPairs++;
 
+        //CHECK IF GAME IS FINISHED
         if (cards.length / 2 - solvedPairs === 0) {
-          //CHECK IF GAME IS FINISHED
           console.log("finished");
+          startMenu.classList.remove("hidden");
+          startMenu.innerHTML = "<h3>Finished!</h3>";
+          clearInterval(timeCounter);
         }
       } else {
+        //ACTION WHEN NO PAIR WAS FOUND
         setTimeout(() => {
-          //ACTION WHEN NO PAIR WAS FOUND
           deckArray[card1].classList.toggle("flipped");
           deckArray[
             card1
@@ -133,7 +142,7 @@ function changeBackground() {
           deckArray[
             card2
           ].style.backgroundImage = `url('tile-images/question-mark.png')`;
-        }, 500);
+        }, 600);
       }
     }
   } else if (gameRunning) {

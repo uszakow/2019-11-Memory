@@ -17,23 +17,48 @@ html {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: .5rem;
+    position: relative;
 
     padding: .5rem;
     width: fit-content;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 1rem auto;
 }
 
 button {
+    color: #ffffff;
     margin: 0 1rem;
+    padding: .8rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 2px solid #5379a8;
+    border-radius: 7px;
+    background-color: #70aaec;
+}
+
+button:hover {
+    box-shadow: 2px 2px rgb(82, 82, 82);
+}
+
+button:active {
+    box-shadow: none;
+    border-top-width: 4px;
+    border-left-width: 4px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+
+}
+
+button:focus {
+    outline: none;
 }
 
 .card {
-    border: 1px solid black;
+    border: 2px solid #70aaec;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #8fbff5;
+    background-color: #c3ddfa;
     padding: .5rem;
     background-image: url('tile-images/question-mark.png');
     background-repeat: no-repeat;
@@ -62,4 +87,54 @@ button {
 
 .removed {
     background-image: none;
+    background-color: #cfcfcf;
+    border-color: #d6d6d6;
+}
+
+.removed:hover {
+    background-color: #ffcdcd;
+    border: 2px solid #ff7f7f;
+    cursor: not-allowed;
+}
+
+.menu-start {
+    background-color: rgba(121, 153, 189, 0.9);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.menu-start h3,
+.menu-start h4 {
+    color: #fff;
+}
+
+.menu-start h3 {
+    margin-bottom: 2.5rem;
+    font-size: 5rem;
+}
+
+.menu-start h4 {
+    font-size: 2.5rem;
+}
+
+.flipped {
+    background-color: #fff;
+    transition: none;
+    border-color: #c4d9f1;
+}
+
+.flipped:hover {
+    background-color: #fff;
+    cursor: default;
+}
+
+.menu-start.hidden {
+    height: 0;
 }
