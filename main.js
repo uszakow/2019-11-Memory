@@ -9,6 +9,8 @@ const moves = document.getElementById("moves");
 let card1;
 let card2;
 
+let solvedPairs = 0;
+
 ////////////////// Randomize cardsArray ////////////////
 shuffle(cardsArray);
 function shuffle(a) {
@@ -35,7 +37,7 @@ function startTimer() {
       //Add random data index from cardsArray to every card
       cards.forEach(function(item, index) {
         item.setAttribute("data-index", cardsArray[index]);
-        console.log(item.dataset.index);
+        // console.log(item.dataset.index);
       });
     }
 
@@ -76,7 +78,10 @@ getButton.addEventListener("click", function() {
   });
   timerSpan.innerText = 0;
   card1 = card2 = undefined;
+  moves.innerText = 0;
 });
+
+//card clicking action
 
 function changeBackground() {
   let deckArray = [...document.getElementsByClassName("card")];
@@ -101,6 +106,7 @@ function changeBackground() {
     if (flippedCardsAmount === 1) {
       moves.innerText++;
       if (cardsArray[card1] === cardsArray[card2]) {
+        //ACTION WHEN PAIR HAS BEEN FOUND
         console.log("pair!");
 
         cards.forEach(e => {
@@ -110,8 +116,15 @@ function changeBackground() {
             e.classList.add("removed");
           }
         });
+        solvedPairs++;
+
+        if (cards.length / 2 - solvedPairs === 0) {
+          //CHECK IF GAME IS FINISHED
+          console.log("finished");
+        }
       } else {
         setTimeout(() => {
+          //ACTION WHEN NO PAIR WAS FOUND
           deckArray[card1].classList.toggle("flipped");
           deckArray[
             card1
@@ -120,9 +133,7 @@ function changeBackground() {
           deckArray[
             card2
           ].style.backgroundImage = `url('tile-images/question-mark.png')`;
-
-          // .style.backgroundImage = `url('tile-images/question-mark.png')`;
-        }, 1300);
+        }, 500);
       }
     }
   } else if (gameRunning) {
