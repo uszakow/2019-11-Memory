@@ -66,11 +66,7 @@ function clickCard() {
     if (cardFirst !== null && cardSecond !== null) {
         //-jeżeli przy otwartych dwóch kartach kliknąć jeszcze jedną, to dwie karty odwracają się natychmiast
         clearTimeout(timerMoves);
-        cardFirst.style.backgroundImage = '';
-        cardSecond.style.backgroundImage = '';
-        //wyzerować zmienne dla kart
-        cardFirst = null;
-        cardSecond = null;
+        viewCover();
     }
     if (cardFirst === null && cardSecond === null) {
         cardFirst = this;
@@ -85,14 +81,16 @@ function clickCard() {
         checkTwoCards(cardFirst, cardSecond);
         //-jeżeli 2 karta != 1 karta, to po 2 sekundach odwrócić obie z powrotem
         if (cardFirst.style != null && cardSecond.style != null) {
-            timerMoves = setTimeout(() => {
-                cardFirst.style.backgroundImage = '';
-                cardSecond.style.backgroundImage = '';
-                //wyzerować zmienne dla kart
-                cardFirst = null;
-                cardSecond = null;
-            }, 2000);
+            timerMoves = setTimeout(viewCover, 2000);
         }
+    }
+    //odwrócić karty
+    function viewCover() {
+        cardFirst.style.backgroundImage = '';
+        cardSecond.style.backgroundImage = '';
+        //wyzerować zmienne dla kart
+        cardFirst = null;
+        cardSecond = null;
     }
 }
 
@@ -110,7 +108,6 @@ function checkTwoCards(first, second) {
         if (cards.length === 0) {
             clearInterval(timerId)
             alert(`You won in ${moves.innerHTML} moves and ${timerInDoc.innerText} secunds`)
-            console.log(timerId)
         }
     }
 }
