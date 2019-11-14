@@ -15,7 +15,7 @@
 //Jeżeli nacisnąć restart, to prosi potwierdzenia. Jeżeli tak, to zaczyna grę od samego początku
 
 //Utworzyć tablicę indeksów kart - dwa identyczne indeksy na każdą parę
-const indexOfCard = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
+const indexesForCards = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
 
 //Przemieszać tablicę
 function shuffleArray(array) {
@@ -25,12 +25,12 @@ function shuffleArray(array) {
     }
     return array;
 }
-shuffleArray(indexOfCard);
+shuffleArray(indexesForCards);
 
 //Nadać każdej karcie indeks
-let cards = document.querySelectorAll(".card");
+const cards = Array.from(document.querySelectorAll(".card"));
 cards.forEach(function (item, index) {
-    item.setAttribute("data-index", indexOfCard[index]);
+    item.cardIndex = indexesForCards[index];
 });
 
 //Przy kliknięciu na kartę...
@@ -58,10 +58,8 @@ function clickCard() {
             timerInDoc.innerHTML++;
         }, 1000);
     }
-    //-nadać karcie obrazek odpowiednio do indeksu (jeżeli ma data-index)
-    if (this.hasAttribute('data-index')) {
-        this.style.backgroundImage = `url('tile-images/tile_${this.getAttribute("data-index")}.png')`;
-    }
+    //-nadać karcie obrazek odpowiednio do indeksu
+    this.style.backgroundImage = `url('tile-images/tile_${this.cardIndex}.png')`;
     //-zapisać 1 klikniętą kartę do 1 zmiennej, 2 kartę do 2 zmiennej. Jeżeli niemożliwe wyzerować
     if (cardFirst !== null && cardSecond !== null) {
         //-jeżeli przy otwartych dwóch kartach kliknąć jeszcze jedną, to dwie karty odwracają się natychmiast
@@ -74,7 +72,7 @@ function clickCard() {
     else if (cardSecond === null && cardFirst !== this) {
         cardSecond = this;
         //-po każdej parze kart licznik ruchów zwiększa się na 1
-        if (cardFirst.getAttribute('data-index') && cardSecond.getAttribute('data-index')) {
+        if (cardFirst && cardSecond) {
             moves.innerText++;
         }
         //wysłąć dwie karty na sprawdzanie identyczności
@@ -84,6 +82,7 @@ function clickCard() {
             timerMoves = setTimeout(viewCover, 2000);
         }
     }
+
     //odwrócić karty
     function viewCover() {
         cardFirst.style.backgroundImage = '';
@@ -94,16 +93,22 @@ function clickCard() {
     }
 }
 
-//-jeżeli 2 karta == 1 karta, to zabrać z pola (obie karty nie można więcej przycisnąć)
+//-jeżeli 2 karta === 1 karta, to zabrać z pola (obie karty nie można więcej przycisnąć)
 function checkTwoCards(first, second) {
-    if (first.getAttribute('data-index') === second.getAttribute('data-index')) {
+    if (first.cardIndex === second.cardIndex) {
         first.classList.remove('card');
-        first.removeAttribute('data-index');
         first.style.backgroundImage = '';
         second.classList.remove('card');
-        second.removeAttribute('data-index');
         second.style.backgroundImage = '';
-        cards = document.querySelectorAll(".card");
+        //usunąć eventListener dla usuwanych kart
+        cards.forEach(function (item) {
+            if (item === first || item === second) {
+                item.removeEventListener('click', clickCard);
+            }
+        })
+        //usunąć z tablicy odpowiednie elementy
+        cards.splice(cards.indexOf(first), 1);
+        cards.splice(cards.indexOf(second), 1);
         //Jeżeli nie zostało żadnej pary kart, to pojawia się alert "wygrałeś po ...ruchach za ...sekund"
         if (cards.length === 0) {
             clearInterval(timerId)
